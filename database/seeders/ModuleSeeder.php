@@ -46,6 +46,22 @@ class ModuleSeeder extends Seeder
                 'activo' => true,
                 'orden' => 4,
             ],
+            [
+                'nombre' => 'Categorías',
+                'slug' => 'categories',
+                'icono' => '🏷️',
+                'descripcion' => 'Gestión de categorías de productos',
+                'activo' => true,
+                'orden' => 5,
+            ],
+            [
+                'nombre' => 'Productos',
+                'slug' => 'products',
+                'icono' => '☕',
+                'descripcion' => 'Gestión de productos de café',
+                'activo' => true,
+                'orden' => 6,
+            ],
         ];
 
         foreach ($modules as $module) {
@@ -53,14 +69,14 @@ class ModuleSeeder extends Seeder
                 ['slug' => $module['slug']],
                 $module
             );
-            
+
             $this->createModulePermissions($module['slug']);
         }
     }
 
     private function createModulePermissions(string $slug): void
     {
-        $actions = ['view', 'create', 'edit', 'delete'];
+        $actions = ['view', 'create', 'edit', 'delete', 'manage'];
 
         foreach ($actions as $action) {
             Permission::firstOrCreate(

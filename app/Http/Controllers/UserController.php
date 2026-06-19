@@ -10,47 +10,49 @@ class UserController extends Controller
 {
     public function index()
     {
-        auth()->user()->can('view users') ?: abort(403);
-        $users = User::join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
-            ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
-            ->select('users.*', 'roles.name as role_name')
-            ->paginate(15);
+        auth()->user()->can('users view') ?: abort(403);
+
+        $users = User::with('roles')->paginate(15);
 
         return view('users.index', compact('users'));
     }
 
     public function create()
     {
-        return view('users.create');
+        auth()->user()->can('users create') ?: abort(403);
+
+        $roles = Role::all();
+
+        return view('users.create', compact('roles'));
     }
 
     public function store(Request $request)
     {
-        auth()->user()->can('create users') ?: abort(403);
+        auth()->user()->can('users create') ?: abort(403);
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',
             'password' => 'required|min:8|confirmed',
-            'roles' => 'array',
+            'roles' => 'required|array',
         ]);
 
         $user = User::create([
             'name' => $validated['name'],
             'email' => $validated['email'],
-            'password' => bcrypt($validated['password']),
+            'password' => $validated['password'],
         ]);
 
-        // if ($request->has('roles')) {
-        //     $user->syncRoles($request->roles);
-        // }
+        $roleNames = Role::whereIn('id', $request->roles)->pluck('name')->toArray();
+        $user->syncRoles($roleNames);
 
         return redirect()->route('users.index')->with('success', 'Usuario creado exitosamente.');
     }
 
     public function edit(User $user)
     {
-        auth()->user()->can('edit users') ?: abort(403);
+        auth()->user()->can('users edit') ?: abort(403);
+
         $roles = Role::all();
 
         return view('users.edit', compact('user', 'roles'));
@@ -58,13 +60,13 @@ class UserController extends Controller
 
     public function update(Request $request, User $user)
     {
-        auth()->user()->can('edit users') ?: abort(403);
+        auth()->user()->can('users edit') ?: abort(403);
 
         $validated = $request->validate([
             'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $user->id,
+            'email' => 'required|email|unique:users,email,'.$user->id,
             'password' => 'nullable|min:8|confirmed',
-            'roles' => 'array',
+            'roles' => 'required|array',
         ]);
 
         $user->update([
@@ -73,19 +75,22 @@ class UserController extends Controller
         ]);
 
         if ($request->filled('password')) {
-            $user->update(['password' => bcrypt($validated['password'])]);
+            $user->update(['password' => $validated['password']]);
         }
 
-        if ($request->has('roles')) {
-            $user->syncRoles($request->roles);
-        }
+        $roleNames = Role::whereIn('id', $request->roles)->pluck('name')->toArray();
+        $user->syncRoles($roleNames);
 
         return redirect()->route('users.index')->with('success', 'Usuario actualizado exitosamente.');
     }
 
     public function destroy(User $user)
     {
-        // auth()->user()->can('delete users') ?: abort(403);
+        auth()->user()->can('users delete') ?: abort(403);
+
+        if ($user->id === auth()->id()) {
+            return back()->with('error', 'No puedes eliminar tu propia cuenta.');
+        }
 
         $user->delete();
 

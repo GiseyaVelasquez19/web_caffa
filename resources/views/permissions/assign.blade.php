@@ -8,7 +8,7 @@
         <p class="text-gray-600 mb-6">Rol: <span class="font-semibold">{{ $role->name }}</span></p>
 
         <div class="bg-white rounded-lg shadow p-8">
-            <form method="POST" action="{{ route('roles.update', $role) }}" class="space-y-6">
+            <form method="POST" action="{{ route('permissions.sync', $role) }}" class="space-y-6">
                 @csrf
                 @method('PUT')
 

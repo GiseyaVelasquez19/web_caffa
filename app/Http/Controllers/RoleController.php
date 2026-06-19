@@ -56,7 +56,7 @@ class RoleController extends Controller
         auth()->user()->can('edit roles') ?: abort(403);
 
         $validated = $request->validate([
-            'name' => 'required|string|unique:roles,name,' . $role->id,
+            'name' => 'required|string|unique:roles,name,'.$role->id,
             'permissions' => 'array',
         ]);
 

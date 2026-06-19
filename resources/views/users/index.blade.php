@@ -4,71 +4,82 @@
 
 @section('content')
     <div class="flex justify-between items-center mb-6">
-        <h1 class="text-3xl font-bold text-amber-900">Gestión de Usuarios</h1>
-        @can('create users')
-            <a href="{{ route('users.create') }}" class="bg-amber-900 hover:bg-amber-800 text-white font-bold py-2 px-4 rounded-lg transition">
+        <div>
+            <h1 class="text-2xl font-bold text-gray-800">Usuarios</h1>
+            <p class="text-gray-500 text-sm">Gestiona los usuarios del sistema</p>
+        </div>
+        @can('users create')
+            <a href="{{ route('users.create') }}" class="text-white font-medium py-2 px-4 rounded-lg transition text-sm" style="background-color: #6F4E37" onmouseover="this.style.backgroundColor='#5A3E2B'" onmouseout="this.style.backgroundColor='#6F4E37'">
                 + Nuevo Usuario
             </a>
         @endcan
     </div>
 
-    <div class="bg-white rounded-lg shadow overflow-hidden">
+    <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
         <table class="w-full">
-            <thead class="bg-amber-900 text-white">
+            <thead class="bg-gray-50 border-b border-gray-100">
                 <tr>
-                    <th class="px-6 py-3 text-left text-sm font-semibold">Nombre</th>
-                    <th class="px-6 py-3 text-left text-sm font-semibold">Email</th>
-                    <th class="px-6 py-3 text-left text-sm font-semibold">Roles</th>
-                    <th class="px-6 py-3 text-left text-sm font-semibold">Super Admin</th>
-                    <th class="px-6 py-3 text-center text-sm font-semibold">Acciones</th>
+                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wide">Nombre</th>
+                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wide">Email</th>
+                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wide">Roles</th>
+                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wide">Acciones</th>
                 </tr>
             </thead>
-            <tbody class="divide-y divide-gray-200">
+            <tbody class="divide-y divide-gray-100">
                 @forelse ($users as $user)
-                    <tr class="hover:bg-gray-50">
-                        <td class="px-6 py-4 text-sm text-gray-900">{{ $user->name }}</td>
-                        <td class="px-6 py-4 text-sm text-gray-600">{{ $user->email }}</td>
-                        <td class="px-6 py-4 text-sm">
-                            @forelse ($user->roles as $role)
-                                <span class="inline-block bg-amber-100 text-amber-800 px-2 py-1 rounded text-xs mr-1">
-                                    {{ $role->name }}
-                                </span>
-                            @empty
-                                <span class="text-gray-400 text-xs">Sin roles</span>
-                            @endforelse
+                    <tr class="hover:bg-gray-50 transition">
+                        <td class="px-6 py-4">
+                            <div class="flex items-center gap-3">
+                                <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white" style="background-color: #6F4E37">
+                                    {{ strtoupper(substr($user->name, 0, 2)) }}
+                                </div>
+                                <div>
+                                    <p class="text-sm font-medium text-gray-800">{{ $user->name }}</p>
+                                    @if ($user->is_superadmin)
+                                        <span class="text-xs" style="color: #6F4E37">👑 Super Admin</span>
+                                    @endif
+                                </div>
+                            </div>
                         </td>
+                        <td class="px-6 py-4 text-sm text-gray-500">{{ $user->email }}</td>
                         <td class="px-6 py-4 text-sm">
-                            @if ($user->is_superadmin)
-                                <span class="inline-block bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs font-semibold">
-                                    👑 Sí
-                                </span>
-                            @else
-                                <span class="text-gray-400 text-xs">No</span>
-                            @endif
+                            <div class="flex flex-wrap gap-1">
+                                @forelse ($user->roles as $role)
+                                    <span class="inline-block bg-gray-100 text-gray-600 px-2 py-1 rounded text-xs">
+                                        {{ $role->name }}
+                                    </span>
+                                @empty
+                                    <span class="text-gray-400 text-xs">Sin roles</span>
+                                @endforelse
+                            </div>
                         </td>
-                        <td class="px-6 py-4 text-sm text-center space-x-2">
-                            @can('edit users')
-                                <a href="{{ route('users.edit', $user) }}" class="text-blue-600 hover:text-blue-900">Editar</a>
+                        <td class="px-6 py-4 text-sm space-x-3">
+                            @can('users edit')
+                                <a href="{{ route('users.edit', $user) }}" class="font-medium transition hover:underline" style="color: #6F4E37">
+                                    Editar
+                                </a>
                             @endcan
-                            @can('delete users')
+                            @can('users delete')
                                 <form method="POST" action="{{ route('users.destroy', $user) }}" class="inline" onsubmit="return confirm('¿Estás seguro?')">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="text-red-600 hover:text-red-900">Eliminar</button>
+                                    <button type="submit" class="text-red-500 hover:text-red-700 font-medium transition">
+                                        Eliminar
+                                    </button>
                                 </form>
                             @endcan
                         </td>
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="5" class="px-6 py-4 text-center text-gray-500">No hay usuarios registrados</td>
+                        <td colspan="4" class="px-6 py-8 text-center text-gray-400 text-sm">No hay usuarios registrados</td>
                     </tr>
                 @endforelse
             </tbody>
         </table>
     </div>
 
-    <div class="mt-6">
+    <div class="mt-4">
         {{ $users->links() }}
     </div>
 @endsection

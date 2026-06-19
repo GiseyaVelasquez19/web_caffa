@@ -23,7 +23,12 @@ class Module extends Model
 
     public function permissions()
     {
-        return Permission::where('name', 'like', $this->slug . '%')->get();
+        $actions = ['view', 'create', 'edit', 'delete', 'manage'];
+
+        return Permission::whereIn('name', array_map(
+            fn ($action) => "{$this->slug} {$action}",
+            $actions
+        ))->get();
     }
 
     public static function getActiveModules()
@@ -33,6 +38,6 @@ class Module extends Model
 
     public function hasPermission(string $action): bool
     {
-        return Permission::where('name', $this->slug . ' ' . $action)->exists();
+        return Permission::where('name', $this->slug.' '.$action)->exists();
     }
 }

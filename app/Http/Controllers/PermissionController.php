@@ -52,7 +52,7 @@ class PermissionController extends Controller
         auth()->user()->can('edit permissions') ?: abort(403);
 
         $validated = $request->validate([
-            'name' => 'required|string|unique:permissions,name,' . $permission->id,
+            'name' => 'required|string|unique:permissions,name,'.$permission->id,
             'description' => 'nullable|string',
         ]);
 
@@ -77,5 +77,20 @@ class PermissionController extends Controller
         $rolePermissions = $role->permissions->pluck('id')->toArray();
 
         return view('permissions.assign', compact('role', 'permissions', 'rolePermissions'));
+    }
+
+    public function syncRolePermissions(Request $request, Role $role)
+    {
+        auth()->user()->can('assign permissions') ?: abort(403);
+
+        $validated = $request->validate([
+            'permissions' => 'array',
+            'permissions.*' => 'exists:permissions,id',
+        ]);
+
+        $permissions = Permission::whereIn('id', $validated['permissions'] ?? [])->get();
+        $role->syncPermissions($permissions);
+
+        return redirect()->route('permissions.assign', $role)->with('success', 'Permisos actualizados exitosamente.');
     }
 }

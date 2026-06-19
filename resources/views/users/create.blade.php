@@ -4,15 +4,22 @@
 
 @section('content')
     <div class="max-w-2xl mx-auto">
-        <h1 class="text-3xl font-bold text-amber-900 mb-6">Crear Nuevo Usuario</h1>
+        <div class="mb-6">
+            <a href="{{ route('users.index') }}" class="text-sm font-medium hover:underline" style="color: #6F4E37">
+                ← Volver a Usuarios
+            </a>
+            <h1 class="text-2xl font-bold text-gray-800 mt-2">Crear Nuevo Usuario</h1>
+        </div>
 
-        <div class="bg-white rounded-lg shadow p-8">
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
             <form method="POST" action="{{ route('users.store') }}" class="space-y-6">
                 @csrf
 
                 <div>
                     <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Nombre</label>
-                    <input type="text" id="name" name="name" required value="{{ old('name') }}" class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition @error('name') border-red-500 @enderror">
+                    <input type="text" id="name" name="name" required value="{{ old('name') }}"
+                        class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:border-transparent outline-none transition @error('name') border-red-500 @enderror"
+                        style="focus:ring-color: #6F4E37">
                     @error('name')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
@@ -20,8 +27,8 @@
 
                 <div>
                     <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Correo Electrónico</label>
-                    <input type="email" id="email" name="email" required value="{{ old('email') }}" 
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition @error('email') border-red-500 @enderror">
+                    <input type="email" id="email" name="email" required value="{{ old('email') }}"
+                        class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:border-transparent outline-none transition @error('email') border-red-500 @enderror">
                     @error('email')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
@@ -29,8 +36,8 @@
 
                 <div>
                     <label for="password" class="block text-sm font-medium text-gray-700 mb-1">Contraseña</label>
-                    <input type="password" id="password" name="password" 
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition @error('password') border-red-500 @enderror">
+                    <input type="password" id="password" name="password"
+                        class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:border-transparent outline-none transition @error('password') border-red-500 @enderror">
                     @error('password')
                         <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
                     @enderror
@@ -38,8 +45,8 @@
 
                 <div>
                     <label for="password_confirmation" class="block text-sm font-medium text-gray-700 mb-1">Confirmar Contraseña</label>
-                    <input type="password" id="password_confirmation" name="password_confirmation" 
-                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent outline-none transition">
+                    <input type="password" id="password_confirmation" name="password_confirmation"
+                        class="w-full px-4 py-2.5 border border-gray-300 rounded-lg focus:ring-2 focus:border-transparent outline-none transition">
                 </div>
 
                 <div>
@@ -47,18 +54,23 @@
                     <div class="space-y-2">
                         @foreach ($roles as $role)
                             <label class="flex items-center">
-                                <input type="checkbox" name="roles[]" value="{{ $role->id }}" class="rounded border-gray-300">
+                                <input type="checkbox" name="roles[]" value="{{ $role->id }}"
+                                    {{ old('roles') && in_array($role->id, old('roles', [])) ? 'checked' : '' }}
+                                    class="rounded border-gray-300">
                                 <span class="ml-2 text-gray-700">{{ $role->name }}</span>
                             </label>
                         @endforeach
                     </div>
+                    @error('roles')
+                        <p class="text-red-500 text-sm mt-1">{{ $message }}</p>
+                    @enderror
                 </div>
 
-                <div class="flex space-x-4">
-                    <button type="submit" class="bg-amber-900 hover:bg-amber-800 text-white font-bold py-2 px-6 rounded-lg transition">
+                <div class="flex gap-4 pt-4">
+                    <button type="submit" class="text-white font-medium py-2.5 px-6 rounded-lg transition text-sm" style="background-color: #6F4E37" onmouseover="this.style.backgroundColor='#5A3E2B'" onmouseout="this.style.backgroundColor='#6F4E37'">
                         Crear Usuario
                     </button>
-                    <a href="{{ route('users.index') }}" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-6 rounded-lg transition">
+                    <a href="{{ route('users.index') }}" class="bg-gray-100 hover:bg-gray-200 text-gray-700 font-medium py-2.5 px-6 rounded-lg transition text-sm">
                         Cancelar
                     </a>
                 </div>

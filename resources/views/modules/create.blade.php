@@ -29,29 +29,70 @@
 
             <div class="mb-6">
                 <label for="slug" class="block text-sm font-semibold text-amber-900 mb-2">Slug (Identificador)</label>
-                <input type="text" id="slug" name="slug" value="{{ old('slug') }}" 
-                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-amber-500"
-                    placeholder="ej: products, customers, reports"
-                    pattern="^[a-z0-9_]+$"
-                    required>
-                <p class="text-xs text-gray-600 mt-1">Solo minúsculas, números y guiones bajos. Se usará para crear permisos automáticamente</p>
+                <select id="slug" name="slug" required
+                    class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-amber-500 bg-white">
+                    <option value="">Selecciona una ruta...</option>
+                    @foreach ($routePrefixes as $prefix)
+                        <option value="{{ $prefix }}" {{ old('slug') == $prefix ? 'selected' : '' }}>{{ $prefix }}</option>
+                    @endforeach
+                </select>
+                <p class="text-xs text-gray-600 mt-1">Selecciona la ruta existente a la que corresponde este módulo. Se usará para crear permisos automáticamente</p>
             </div>
 
             <div class="mb-6">
-                <label for="icono" class="block text-sm font-semibold text-amber-900 mb-2">Icono (Selecciona un emoji)</label>
-                <div class="grid grid-cols-8 gap-2 mb-4 p-4 bg-gray-50 rounded-lg border border-gray-300">
-                    @php
-                        $emojis = ['📦', '👥', '🎭', '🔐', '☕', '📊', '📈', '💼', '🛠️', '⚙️', '🔧', '📝', '📋', '📂', '🗂️', '💾', '🔍', '🔎', '📱', '💻', '🖥️', '⌨️', '🖱️', '🎨', '🎯', '🎪', '🎭', '🎬', '🎤', '🎧', '🎵', '🎶', '📚', '📖', '📕', '📗', '📘', '📙', '📓', '📔', '📒', '📑', '🧾', '📄', '📃', '📜', '📰', '🗞️', '📡', '📢', '📣', '📯', '📻', '📺', '📷', '📸', '📹', '🎥', '🎞️', '📽️', '🎬', '📲', '☎️', '📞', '📟', '📠', '🔔', '🔕', '📧', '📨', '📩', '📤', '📥', '📦', '🏷️', '🧷', '📪', '📫', '📬', '📭', '📮', '✉️', '✏️', '✒️', '🖋️', '🖊️', '🖌️', '🖍️', '📝'];
-                    @endphp
-                    @foreach ($emojis as $emoji)
-                        <label class="flex items-center justify-center p-3 border-2 border-gray-300 rounded-lg cursor-pointer hover:border-amber-500 hover:bg-amber-50 transition">
-                            <input type="radio" name="icono" value="{{ $emoji }}" {{ old('icono') == $emoji ? 'checked' : '' }} class="hidden">
-                            <span class="text-3xl">{{ $emoji }}</span>
-                        </label>
-                    @endforeach
+                <label for="icono" class="block text-sm font-semibold text-amber-900 mb-2">Icono</label>
+                <div class="flex items-center gap-4 p-4 bg-gray-50 rounded-lg border border-gray-300">
+                    <div class="text-4xl" id="icono-preview">{{ old('icono', '📦') }}</div>
+                    <select name="icono" id="icono" class="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:border-amber-500 bg-white" onchange="document.getElementById('icono-preview').textContent = this.value">
+                        <optgroup label="Gestión">
+                            <option value="📦" {{ old('icono') == '📦' ? 'selected' : '' }}>📦 Módulos</option>
+                            <option value="📊" {{ old('icono') == '📊' ? 'selected' : '' }}>📊 Reportes</option>
+                            <option value="📈" {{ old('icono') == '📈' ? 'selected' : '' }}>📈 Estadísticas</option>
+                            <option value="📋" {{ old('icono') == '📋' ? 'selected' : '' }}>📋 Gestión</option>
+                            <option value="📂" {{ old('icono') == '📂' ? 'selected' : '' }}>📂 Archivos</option>
+                            <option value="🗂️" {{ old('icono') == '🗂️' ? 'selected' : '' }}>🗂️ Registros</option>
+                            <option value="📝" {{ old('icono') == '📝' ? 'selected' : '' }}>📝 Formularios</option>
+                            <option value="📑" {{ old('icono') == '📑' ? 'selected' : '' }}>📑 Documentos</option>
+                        </optgroup>
+                        <optgroup label="Usuarios">
+                            <option value="👥" {{ old('icono') == '👥' ? 'selected' : '' }}>👥 Usuarios</option>
+                            <option value="🎭" {{ old('icono') == '🎭' ? 'selected' : '' }}>🎭 Roles</option>
+                            <option value="👤" {{ old('icono') == '👤' ? 'selected' : '' }}>👤 Perfil</option>
+                        </optgroup>
+                        <optgroup label="Seguridad">
+                            <option value="🔐" {{ old('icono') == '🔐' ? 'selected' : '' }}>🔐 Permisos</option>
+                            <option value="🔑" {{ old('icono') == '🔑' ? 'selected' : '' }}>🔑 Acceso</option>
+                            <option value="🛡️" {{ old('icono') == '🛡️' ? 'selected' : '' }}>🛡️ Seguridad</option>
+                            <option value="🔒" {{ old('icono') == '🔒' ? 'selected' : '' }}>🔒 Auditoría</option>
+                        </optgroup>
+                        <optgroup label="Comercio">
+                            <option value="💼" {{ old('icono') == '💼' ? 'selected' : '' }}>💼 Negocios</option>
+                            <option value="🏷️" {{ old('icono') == '🏷️' ? 'selected' : '' }}>🏷️ Categorías</option>
+                            <option value="🛒" {{ old('icono') == '🛒' ? 'selected' : '' }}>🛒 Ventas</option>
+                            <option value="💰" {{ old('icono') == '💰' ? 'selected' : '' }}>💰 Finanzas</option>
+                        </optgroup>
+                        <optgroup label="Tecnología">
+                            <option value="💻" {{ old('icono') == '💻' ? 'selected' : '' }}>💻 Sistema</option>
+                            <option value="⚙️" {{ old('icono') == '⚙️' ? 'selected' : '' }}>⚙️ Configuración</option>
+                            <option value="📱" {{ old('icono') == '📱' ? 'selected' : '' }}>📱 App</option>
+                            <option value="🔧" {{ old('icono') == '🔧' ? 'selected' : '' }}>🔧 Mantenimiento</option>
+                            <option value="☕" {{ old('icono') == '☕' ? 'selected' : '' }}>☕ Producto</option>
+                        </optgroup>
+                        <optgroup label="Comunicación">
+                            <option value="📧" {{ old('icono') == '📧' ? 'selected' : '' }}>📧 Correos</option>
+                            <option value="📢" {{ old('icono') == '📢' ? 'selected' : '' }}>📢 Notificaciones</option>
+                            <option value="📡" {{ old('icono') == '📡' ? 'selected' : '' }}>📡 Conexiones</option>
+                            <option value="🔔" {{ old('icono') == '🔔' ? 'selected' : '' }}>🔔 Alertas</option>
+                        </optgroup>
+                        <optgroup label="Diseño">
+                            <option value="🎨" {{ old('icono') == '🎨' ? 'selected' : '' }}>🎨 Diseño</option>
+                            <option value="🎯" {{ old('icono') == '🎯' ? 'selected' : '' }}>🎯 Objetivos</option>
+                            <option value="📚" {{ old('icono') == '📚' ? 'selected' : '' }}>📚 Contenido</option>
+                            <option value="📰" {{ old('icono') == '📰' ? 'selected' : '' }}>📰 Blog</option>
+                        </optgroup>
+                    </select>
                 </div>
-                <input type="hidden" id="icono" name="icono" value="{{ old('icono') }}">
-                <p class="text-xs text-gray-600 mt-1">Selecciona un emoji haciendo clic en él</p>
+                <p class="text-xs text-gray-600 mt-1">Selecciona un icono para el módulo</p>
             </div>
 
             <div class="mb-6">
@@ -71,6 +112,7 @@
 
             <div class="mb-6">
                 <label class="flex items-center">
+                    <input type="hidden" name="activo" value="0">
                     <input type="checkbox" name="activo" value="1" {{ old('activo', true) ? 'checked' : '' }} class="mr-2">
                     <span class="text-sm font-semibold text-amber-900">Activar módulo inmediatamente</span>
                 </label>

@@ -59,11 +59,13 @@ class DatabaseSeeder extends Seeder
             'roles view', 'roles create', 'roles edit', 'roles delete',
             'permissions view', 'permissions create', 'permissions edit', 'permissions delete',
             'modules view', 'modules create', 'modules edit', 'modules delete',
+            'categories view', 'categories create', 'categories edit', 'categories delete',
+            'products view', 'products create', 'products edit', 'products delete',
         ];
 
         $roles = [
             'Super Admin' => $superAdminPermissions,
-            'Admin' => ['view users', 'create users', 'edit users', 'view roles', 'view permissions', 'view modules', 'users view', 'users create', 'users edit', 'roles view', 'permissions view', 'modules view'],
+            'Admin' => ['view users', 'create users', 'edit users', 'view roles', 'view permissions', 'view modules', 'users view', 'users create', 'users edit', 'roles view', 'permissions view', 'modules view', 'categories view', 'categories create', 'categories edit', 'categories delete', 'products view', 'products create', 'products edit', 'products delete'],
             'Manager' => ['view users', 'view modules', 'users view', 'modules view'],
             'User' => ['view modules', 'modules view'],
         ];
