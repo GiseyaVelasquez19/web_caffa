@@ -14,7 +14,7 @@
 <body class="bg-[#FAF7F4]" x-data="{ sidebarOpen: window.innerWidth >= 768 }" x-cloak @keydown.escape="sidebarOpen = false">
     @auth
         <!-- Sidebar -->
-        <div class="fixed inset-y-0 left-0 z-50 w-72 md:w-64 text-white shadow-xl transform transition-transform duration-300 ease-in-out md:translate-x-0"
+        <div class="fixed inset-y-0 left-0 z-50 w-72 md:w-64 flex flex-col text-white shadow-xl transform transition-transform duration-300 ease-in-out md:translate-x-0"
              style="background: linear-gradient(180deg, #6F4E37 0%, #5A3E2B 100%)"
              :class="sidebarOpen ? 'translate-x-0' : '-translate-x-full'"
              @click.away="if(window.innerWidth < 768) sidebarOpen = false">
