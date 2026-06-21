@@ -4,7 +4,7 @@
 <div class="max-w-4xl mx-auto">
     <div class="bg-white rounded-lg shadow-lg p-8">
         <div class="flex items-center gap-3 mb-6">
-            <span class="text-4xl">{{ $module->icono ?? '📦' }}</span>
+            <span class="text-4xl"><i class="{{ $module->icono ?? 'fas fa-puzzle-piece' }}" style="color: #6F4E37"></i></span>
             <div>
                 <h1 class="text-3xl font-bold text-amber-900">Permisos del Módulo: {{ $module->nombre }}</h1>
                 <p class="text-gray-600">Slug: <code class="bg-gray-100 px-2 py-1 rounded">{{ $module->slug }}</code></p>

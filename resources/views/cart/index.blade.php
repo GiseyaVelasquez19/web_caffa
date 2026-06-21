@@ -10,7 +10,9 @@
 
     @if ($items->isEmpty())
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-12 text-center">
-            <div class="text-6xl mb-4">🛒</div>
+            <div class="w-20 h-20 rounded-full flex items-center justify-center text-4xl mx-auto mb-4" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)">
+                <i class="fas fa-shopping-cart" style="color: #6F4E37"></i>
+            </div>
             <p class="text-gray-500 mb-2">Tu carrito está vacío</p>
             <p class="text-gray-400 text-sm mb-4">Explora nuestro catálogo de cafés premium</p>
             <a href="{{ route('products.catalog') }}" class="inline-flex items-center gap-2 text-white px-5 py-2.5 rounded-lg transition text-sm font-medium" style="background-color: #6F4E37">
@@ -76,8 +78,8 @@
                 <form method="POST" action="{{ route('cart.clear') }}">
                     @csrf
                     @method('DELETE')
-                    <button type="submit" class="text-sm text-gray-500 hover:text-red-500 transition">
-                        🗑️ Vaciar carrito
+                    <button type="submit" class="text-sm text-gray-500 hover:text-red-500 transition flex items-center gap-2">
+                        <i class="fas fa-trash"></i> Vaciar carrito
                     </button>
                 </form>
             </div>

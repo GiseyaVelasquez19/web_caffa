@@ -30,8 +30,8 @@
     <div class="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition">
             <div class="flex items-center gap-4">
-                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)">
-                    ☕
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)">
+                    <i class="fas fa-coffee" style="color: #6F4E37"></i>
                 </div>
                 <div>
                     <p class="text-gray-400 text-xs font-medium uppercase tracking-wider">Productos</p>
@@ -42,8 +42,8 @@
 
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition">
             <div class="flex items-center gap-4">
-                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)">
-                    🏷️
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)">
+                    <i class="fas fa-tags" style="color: #6F4E37"></i>
                 </div>
                 <div>
                     <p class="text-gray-400 text-xs font-medium uppercase tracking-wider">Categorías</p>
@@ -54,8 +54,8 @@
 
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition">
             <div class="flex items-center gap-4">
-                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)">
-                    👥
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)">
+                    <i class="fas fa-users" style="color: #6F4E37"></i>
                 </div>
                 <div>
                     <p class="text-gray-400 text-xs font-medium uppercase tracking-wider">Usuarios</p>
@@ -66,8 +66,8 @@
 
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition">
             <div class="flex items-center gap-4">
-                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl {{ $lowStockProducts > 0 ? 'bg-red-50' : '' }}" style="{{ $lowStockProducts == 0 ? 'background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)' : '' }}">
-                    {{ $lowStockProducts > 0 ? '⚠️' : '📦' }}
+                <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl {{ $lowStockProducts > 0 ? 'bg-red-50' : '' }}" style="{{ $lowStockProducts == 0 ? 'background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)' : '' }}">
+                    <i class="{{ $lowStockProducts > 0 ? 'fas fa-exclamation-triangle text-red-500' : 'fas fa-box' }}" style="{{ $lowStockProducts == 0 ? 'color: #6F4E37' : '' }}"></i>
                 </div>
                 <div>
                     <p class="text-gray-400 text-xs font-medium uppercase tracking-wider">{{ $lowStockProducts > 0 ? 'Stock Bajo' : 'En Stock' }}</p>
@@ -92,12 +92,14 @@
 
             @if ($featuredProducts->isEmpty())
                 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-12 text-center">
-                    <div class="text-6xl mb-4">☕</div>
+                    <div class="w-20 h-20 rounded-full flex items-center justify-center text-4xl mx-auto mb-4" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)">
+                        <i class="fas fa-coffee" style="color: #6F4E37"></i>
+                    </div>
                     <p class="text-gray-500 mb-2">No hay productos registrados</p>
                     <p class="text-gray-400 text-sm mb-4">Comienza agregando tu primer café al catálogo</p>
                     @can('products create')
                         <a href="{{ route('products.create') }}" class="inline-flex items-center gap-2 text-white px-5 py-2.5 rounded-lg transition text-sm font-medium" style="background-color: #6F4E37">
-                            <span>+</span> Crear Producto
+                            <i class="fas fa-plus"></i> Crear Producto
                         </a>
                     @endcan
                 </div>
@@ -109,7 +111,7 @@
                                 @if ($product->imagen)
                                     <img src="{{ Storage::url($product->imagen) }}" alt="{{ $product->nombre }}" class="w-full h-full object-cover group-hover:scale-105 transition duration-300">
                                 @else
-                                    <span class="text-7xl opacity-60 group-hover:scale-110 transition duration-300">☕</span>
+                                    <i class="fas fa-coffee text-5xl opacity-40 group-hover:scale-110 transition duration-300" style="color: #6F4E37"></i>
                                 @endif
                                 @if ($product->stock <= 5 && $product->stock > 0)
                                     <span class="absolute top-3 right-3 bg-amber-500 text-white text-xs px-2 py-1 rounded-full font-medium">
@@ -144,7 +146,7 @@
             <!-- System Info -->
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6">
                 <h3 class="font-semibold text-gray-800 mb-4 flex items-center gap-2">
-                    <span class="w-8 h-8 rounded-lg flex items-center justify-center text-sm" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)">📊</span>
+                    <span class="w-8 h-8 rounded-lg flex items-center justify-center text-sm" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)"><i class="fas fa-chart-bar" style="color: #6F4E37"></i></span>
                     Resumen
                 </h3>
                 <div class="space-y-3">
@@ -177,7 +179,7 @@
                         </svg>
                     </div>
                     <div class="relative">
-                        <span class="text-3xl mb-3 block">👑</span>
+                        <i class="fas fa-crown text-3xl mb-3 text-white/80"></i>
                         <h4 class="font-semibold mb-1">Super Administrador</h4>
                         <p class="text-white/70 text-sm">Acceso completo al sistema</p>
                     </div>
@@ -190,19 +192,19 @@
                 <div class="space-y-2">
                     @can('products create')
                         <a href="{{ route('products.create') }}" class="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition group">
-                            <span class="w-10 h-10 rounded-lg flex items-center justify-center text-lg" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)">➕</span>
+                            <span class="w-10 h-10 rounded-lg flex items-center justify-center text-lg" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)"><i class="fas fa-plus" style="color: #6F4E37"></i></span>
                             <span class="text-sm font-medium text-gray-700 group-hover:text-gray-900">Nuevo Producto</span>
                         </a>
                     @endcan
                     @can('categories create')
                         <a href="{{ route('categories.create') }}" class="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition group">
-                            <span class="w-10 h-10 rounded-lg flex items-center justify-center text-lg" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)">🏷️</span>
+                            <span class="w-10 h-10 rounded-lg flex items-center justify-center text-lg" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)"><i class="fas fa-tag" style="color: #6F4E37"></i></span>
                             <span class="text-sm font-medium text-gray-700 group-hover:text-gray-900">Nueva Categoría</span>
                         </a>
                     @endcan
                     @can('users create')
                         <a href="{{ route('users.create') }}" class="flex items-center gap-3 p-3 rounded-xl hover:bg-gray-50 transition group">
-                            <span class="w-10 h-10 rounded-lg flex items-center justify-center text-lg" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)">👤</span>
+                            <span class="w-10 h-10 rounded-lg flex items-center justify-center text-lg" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)"><i class="fas fa-user-plus" style="color: #6F4E37"></i></span>
                             <span class="text-sm font-medium text-gray-700 group-hover:text-gray-900">Nuevo Usuario</span>
                         </a>
                     @endcan

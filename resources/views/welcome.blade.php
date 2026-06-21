@@ -73,21 +73,21 @@
                     </p>
                     <div class="space-y-4">
                         <div class="flex items-start space-x-3">
-                            <span class="w-10 h-10 rounded-lg flex items-center justify-center text-lg" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)">☕</span>
+                            <span class="w-10 h-10 rounded-lg flex items-center justify-center text-lg" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)"><i class="fas fa-mug-hot" style="color: #6F4E37"></i></span>
                             <div>
                                 <h3 class="font-semibold text-gray-800">Café Premium</h3>
                                 <p class="text-sm text-gray-500">Granos seleccionados y tostados artesanalmente</p>
                             </div>
                         </div>
                         <div class="flex items-start space-x-3">
-                            <span class="w-10 h-10 rounded-lg flex items-center justify-center text-lg" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)">🎯</span>
+                            <span class="w-10 h-10 rounded-lg flex items-center justify-center text-lg" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)"><i class="fas fa-bullseye" style="color: #6F4E37"></i></span>
                             <div>
                                 <h3 class="font-semibold text-gray-800">Sabores Variados</h3>
                                 <p class="text-sm text-gray-500">Clásico, Chocolate, Vainilla, Caramelo y más</p>
                             </div>
                         </div>
                         <div class="flex items-start space-x-3">
-                            <span class="w-10 h-10 rounded-lg flex items-center justify-center text-lg" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)">🚀</span>
+                            <span class="w-10 h-10 rounded-lg flex items-center justify-center text-lg" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)"><i class="fas fa-rocket" style="color: #6F4E37"></i></span>
                             <div>
                                 <h3 class="font-semibold text-gray-800">Gestión Completa</h3>
                                 <p class="text-sm text-gray-500">Sistema de administración profesional</p>
@@ -125,17 +125,17 @@
                 <h2 class="text-2xl font-bold text-gray-800 mb-8 text-center">¿Por qué elegir Caffa?</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="text-center">
-                        <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)">🌍</div>
+                        <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)"><i class="fas fa-award" style="color: #6F4E37"></i></div>
                         <h3 class="font-semibold text-gray-800 mb-2">Café de Calidad</h3>
                         <p class="text-gray-500 text-sm">Seleccionamos los mejores granos de café de todo el mundo</p>
                     </div>
                     <div class="text-center">
-                        <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)">🎨</div>
+                        <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)"><i class="fas fa-leaf" style="color: #6F4E37"></i></div>
                         <h3 class="font-semibold text-gray-800 mb-2">Sabores Únicos</h3>
                         <p class="text-gray-500 text-sm">Aromatizamos nuestro café con sabores naturales y deliciosos</p>
                     </div>
                     <div class="text-center">
-                        <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)">📦</div>
+                        <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)"><i class="fas fa-shipping-fast" style="color: #6F4E37"></i></div>
                         <h3 class="font-semibold text-gray-800 mb-2">Entrega Rápida</h3>
                         <p class="text-gray-500 text-sm">Recibe tu café fresco en la puerta de tu casa</p>
                     </div>

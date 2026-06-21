@@ -10,7 +10,9 @@
 
     @if ($pedidos->isEmpty())
         <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-12 text-center">
-            <div class="text-6xl mb-4">📦</div>
+            <div class="w-20 h-20 rounded-full flex items-center justify-center text-4xl mx-auto mb-4" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)">
+                <i class="fas fa-box" style="color: #6F4E37"></i>
+            </div>
             <p class="text-gray-500 mb-2">Aún no tienes pedidos</p>
             <p class="text-gray-400 text-sm mb-4">Explora nuestro catálogo y realiza tu primera compra</p>
             <a href="{{ route('products.catalog') }}" class="inline-flex items-center gap-2 text-white px-5 py-2.5 rounded-lg transition text-sm font-medium" style="background-color: #6F4E37">
@@ -23,8 +25,8 @@
                 <a href="{{ route('orders.show.my', $pedido) }}" class="block bg-white rounded-2xl shadow-sm border border-gray-100 p-5 hover:shadow-md transition">
                     <div class="flex items-center justify-between">
                         <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 rounded-xl flex items-center justify-center text-2xl" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)">
-                                📦
+                            <div class="w-12 h-12 rounded-xl flex items-center justify-center text-xl" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)">
+                                <i class="fas fa-box" style="color: #6F4E37"></i>
                             </div>
                             <div>
                                 <h3 class="font-semibold text-gray-800">{{ $pedido->codigo_pedido }}</h3>

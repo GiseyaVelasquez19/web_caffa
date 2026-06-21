@@ -17,7 +17,7 @@ class ModuleSeeder extends Seeder
             [
                 'nombre' => 'Usuarios',
                 'slug' => 'users',
-                'icono' => '👥',
+                'icono' => 'fas fa-users',
                 'descripcion' => 'Gestión de usuarios del sistema',
                 'activo' => true,
                 'orden' => 1,
@@ -25,7 +25,7 @@ class ModuleSeeder extends Seeder
             [
                 'nombre' => 'Roles',
                 'slug' => 'roles',
-                'icono' => '🎭',
+                'icono' => 'fas fa-user-tag',
                 'descripcion' => 'Gestión de roles y permisos',
                 'activo' => true,
                 'orden' => 2,
@@ -33,7 +33,7 @@ class ModuleSeeder extends Seeder
             [
                 'nombre' => 'Permisos',
                 'slug' => 'permissions',
-                'icono' => '🔐',
+                'icono' => 'fas fa-shield-alt',
                 'descripcion' => 'Gestión de permisos del sistema',
                 'activo' => true,
                 'orden' => 3,
@@ -41,7 +41,7 @@ class ModuleSeeder extends Seeder
             [
                 'nombre' => 'Módulos',
                 'slug' => 'modules',
-                'icono' => '📦',
+                'icono' => 'fas fa-puzzle-piece',
                 'descripcion' => 'Crear y gestionar módulos parametrizados',
                 'activo' => true,
                 'orden' => 4,
@@ -49,7 +49,7 @@ class ModuleSeeder extends Seeder
             [
                 'nombre' => 'Categorías',
                 'slug' => 'categories',
-                'icono' => '🏷️',
+                'icono' => 'fas fa-tags',
                 'descripcion' => 'Gestión de categorías de productos',
                 'activo' => true,
                 'orden' => 5,
@@ -57,7 +57,7 @@ class ModuleSeeder extends Seeder
             [
                 'nombre' => 'Productos',
                 'slug' => 'products',
-                'icono' => '☕',
+                'icono' => 'fas fa-coffee',
                 'descripcion' => 'Gestión de productos de café',
                 'activo' => true,
                 'orden' => 6,

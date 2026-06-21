@@ -32,7 +32,7 @@
                     <tr class="hover:bg-gray-50 transition">
                         <td class="px-6 py-4 text-sm text-center">
                             <span class="inline-flex w-10 h-10 rounded-xl items-center justify-center text-lg" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)">
-                                {{ $module->icono ?? '📦' }}
+                                <i class="{{ $module->icono ?? 'fas fa-puzzle-piece' }}" style="color: #6F4E37"></i>
                             </span>
                         </td>
                         <td class="px-6 py-4 text-sm font-medium text-gray-800">{{ $module->nombre }}</td>

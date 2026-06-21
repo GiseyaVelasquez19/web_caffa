@@ -33,27 +33,30 @@
 
     <!-- Orders Table -->
     <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
-        <table class="w-full">
-            <thead class="bg-gray-50 border-b border-gray-100">
-                <tr>
-                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Código</th>
-                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Cliente</th>
-                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Estado</th>
-                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Total</th>
-                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Fecha</th>
-                    <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Acciones</th>
-                </tr>
-            </thead>
-            <tbody class="divide-y divide-gray-100">
-                @forelse ($pedidos as $pedido)
-                    <tr class="hover:bg-gray-50 transition">
-                        <td class="px-6 py-4">
-                            <span class="font-mono text-sm font-medium text-gray-800">{{ $pedido->codigo_pedido }}</span>
-                        </td>
-                        <td class="px-6 py-4">
-                            <p class="text-sm font-medium text-gray-800">{{ $pedido->cliente->name }}</p>
-                            <p class="text-xs text-gray-500">{{ $pedido->cliente->email }}</p>
-                        </td>
+        <div class="overflow-x-auto">
+            <table class="w-full min-w-[600px]">
+                <thead class="bg-gray-50 border-b border-gray-100">
+                    <tr>
+                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Código</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase hidden sm:table-cell">Cliente</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Estado</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Total</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase hidden md:table-cell">Fecha</th>
+                        <th class="px-6 py-3 text-left text-xs font-semibold text-gray-500 uppercase">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100">
+                    @forelse ($pedidos as $pedido)
+                        <tr class="hover:bg-gray-50 transition">
+                            <td class="px-6 py-4">
+                                <span class="font-mono text-sm font-medium text-gray-800">{{ $pedido->codigo_pedido }}</span>
+                                <p class="text-xs text-gray-500 sm:hidden mt-1">{{ $pedido->cliente->name }}</p>
+                                <p class="text-xs text-gray-400 md:hidden mt-1">{{ $pedido->created_at->format('d/m/Y') }}</p>
+                            </td>
+                            <td class="px-6 py-4 hidden sm:table-cell">
+                                <p class="text-sm font-medium text-gray-800">{{ $pedido->cliente->name }}</p>
+                                <p class="text-xs text-gray-500">{{ $pedido->cliente->email }}</p>
+                            </td>
                         <td class="px-6 py-4">
                             @php
                                 $color = match($pedido->estado) {
@@ -72,7 +75,7 @@
                         <td class="px-6 py-4">
                             <span class="font-semibold text-gray-800">${{ number_format($pedido->total, 0, ',', '.') }}</span>
                         </td>
-                        <td class="px-6 py-4 text-sm text-gray-500">
+                        <td class="px-6 py-4 text-sm text-gray-500 hidden md:table-cell">
                             {{ $pedido->created_at->format('d/m/Y H:i') }}
                         </td>
                         <td class="px-6 py-4">
@@ -88,8 +91,9 @@
                         </td>
                     </tr>
                 @endforelse
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
 
     <div class="mt-4">

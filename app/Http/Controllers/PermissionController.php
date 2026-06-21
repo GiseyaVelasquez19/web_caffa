@@ -10,7 +10,7 @@ class PermissionController extends Controller
 {
     public function index()
     {
-        auth()->user()->can('view permissions') ?: abort(403);
+        auth()->user()->can('permissions view') ?: abort(403);
         $permissions = Permission::paginate(15);
 
         return view('permissions.index', compact('permissions'));
@@ -18,14 +18,14 @@ class PermissionController extends Controller
 
     public function create()
     {
-        auth()->user()->can('create permissions') ?: abort(403);
+        auth()->user()->can('permissions create') ?: abort(403);
 
         return view('permissions.create');
     }
 
     public function store(Request $request)
     {
-        auth()->user()->can('create permissions') ?: abort(403);
+        auth()->user()->can('permissions create') ?: abort(403);
 
         $validated = $request->validate([
             'name' => 'required|string|unique:permissions',
@@ -42,14 +42,14 @@ class PermissionController extends Controller
 
     public function edit(Permission $permission)
     {
-        auth()->user()->can('edit permissions') ?: abort(403);
+        auth()->user()->can('permissions edit') ?: abort(403);
 
         return view('permissions.edit', compact('permission'));
     }
 
     public function update(Request $request, Permission $permission)
     {
-        auth()->user()->can('edit permissions') ?: abort(403);
+        auth()->user()->can('permissions edit') ?: abort(403);
 
         $validated = $request->validate([
             'name' => 'required|string|unique:permissions,name,'.$permission->id,
@@ -63,7 +63,7 @@ class PermissionController extends Controller
 
     public function destroy(Permission $permission)
     {
-        auth()->user()->can('delete permissions') ?: abort(403);
+        auth()->user()->can('permissions delete') ?: abort(403);
 
         $permission->delete();
 
@@ -72,7 +72,7 @@ class PermissionController extends Controller
 
     public function assignToRole(Role $role)
     {
-        auth()->user()->can('assign permissions') ?: abort(403);
+        auth()->user()->can('permissions edit') ?: abort(403);
         $permissions = Permission::all();
         $rolePermissions = $role->permissions->pluck('id')->toArray();
 
@@ -81,7 +81,7 @@ class PermissionController extends Controller
 
     public function syncRolePermissions(Request $request, Role $role)
     {
-        auth()->user()->can('assign permissions') ?: abort(403);
+        auth()->user()->can('permissions edit') ?: abort(403);
 
         $validated = $request->validate([
             'permissions' => 'array',
