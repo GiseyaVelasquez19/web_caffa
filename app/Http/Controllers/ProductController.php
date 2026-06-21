@@ -8,6 +8,16 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
+    public function catalog()
+    {
+        $products = Product::with('category')
+            ->where('stock', '>', 0)
+            ->orderBy('nombre')
+            ->paginate(12);
+
+        return view('products.catalog', compact('products'));
+    }
+
     public function index()
     {
         auth()->user()->can('products view') ?: abort(403);

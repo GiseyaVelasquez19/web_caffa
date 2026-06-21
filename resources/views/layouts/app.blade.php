@@ -28,8 +28,22 @@
             <!-- Navigation -->
             <nav class="flex-1 px-4 py-6 space-y-1 overflow-y-auto">
                 <a href="{{ route('dashboard') }}" class="flex items-center space-x-3 px-4 py-2.5 rounded-lg hover:bg-white/10 transition text-white/90 hover:text-white">
-                    <span class="text-lg">📊</span>
+                    <span class="w-8 h-8 rounded-lg bg-white/15 flex items-center justify-center text-sm">📊</span>
                     <span class="text-sm">Dashboard</span>
+                </a>
+
+                <!-- Client Links -->
+                <a href="{{ route('products.catalog') }}" class="flex items-center space-x-3 px-4 py-2.5 rounded-lg hover:bg-white/10 transition text-white/90 hover:text-white">
+                    <span class="w-8 h-8 rounded-lg bg-white/15 flex items-center justify-center text-sm">☕</span>
+                    <span class="text-sm">Catálogo</span>
+                </a>
+                <a href="{{ route('cart.index') }}" class="flex items-center space-x-3 px-4 py-2.5 rounded-lg hover:bg-white/10 transition text-white/90 hover:text-white">
+                    <span class="w-8 h-8 rounded-lg bg-white/15 flex items-center justify-center text-sm">🛒</span>
+                    <span class="text-sm">Carrito</span>
+                </a>
+                <a href="{{ route('orders.my') }}" class="flex items-center space-x-3 px-4 py-2.5 rounded-lg hover:bg-white/10 transition text-white/90 hover:text-white">
+                    <span class="w-8 h-8 rounded-lg bg-white/15 flex items-center justify-center text-sm">📦</span>
+                    <span class="text-sm">Mis Pedidos</span>
                 </a>
 
                 @php
@@ -39,11 +53,19 @@
                 @foreach ($modules as $module)
                     @can($module->slug . ' view')
                         <a href="{{ route($module->slug . '.index') }}" class="flex items-center space-x-3 px-4 py-2.5 rounded-lg hover:bg-white/10 transition text-white/90 hover:text-white" title="{{ $module->descripcion }}">
-                            <span class="text-lg">{{ $module->icono }}</span>
+                            <span class="w-8 h-8 rounded-lg bg-white/15 flex items-center justify-center text-sm">{{ $module->icono }}</span>
                             <span class="text-sm">{{ $module->nombre }}</span>
                         </a>
                     @endcan
                 @endforeach
+
+                <!-- Orders (Vendedor/Admin) -->
+                @can('orders view')
+                    <a href="{{ route('orders.index') }}" class="flex items-center space-x-3 px-4 py-2.5 rounded-lg hover:bg-white/10 transition text-white/90 hover:text-white">
+                        <span class="w-8 h-8 rounded-lg bg-white/15 flex items-center justify-center text-sm">🧾</span>
+                        <span class="text-sm">Pedidos</span>
+                    </a>
+                @endcan
             </nav>
 
             <!-- User Section -->

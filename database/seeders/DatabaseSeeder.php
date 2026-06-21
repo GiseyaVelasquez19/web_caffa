@@ -17,76 +17,60 @@ class DatabaseSeeder extends Seeder
         $this->call(ModuleSeeder::class);
         $this->createPermissions();
         $this->createRoles();
-        $this->createSuperAdmin();
+        $this->createAdmin();
     }
 
     private function createPermissions(): void
     {
-        $permissions = [
-            'view users',
-            'create users',
-            'edit users',
-            'delete users',
-            'view roles',
-            'create roles',
-            'edit roles',
-            'delete roles',
-            'view permissions',
-            'create permissions',
-            'edit permissions',
-            'delete permissions',
-            'assign permissions',
-            'view modules',
-            'create modules',
-            'edit modules',
-            'delete modules',
-            'manage modules',
-        ];
+        $modules = ['users', 'roles', 'permissions', 'modules', 'categories', 'products', 'orders'];
+        $actions = ['view', 'create', 'edit', 'delete'];
 
-        foreach ($permissions as $permission) {
-            Permission::firstOrCreate(['name' => $permission, 'guard_name' => 'web']);
+        foreach ($modules as $module) {
+            foreach ($actions as $action) {
+                Permission::firstOrCreate([
+                    'name' => "$module $action",
+                    'guard_name' => 'web',
+                ]);
+            }
         }
     }
 
     private function createRoles(): void
     {
-        $superAdminPermissions = [
-            'view users', 'create users', 'edit users', 'delete users',
-            'view roles', 'create roles', 'edit roles', 'delete roles',
-            'view permissions', 'create permissions', 'edit permissions', 'delete permissions', 'assign permissions',
-            'view modules', 'create modules', 'edit modules', 'delete modules', 'manage modules',
-            'users view', 'users create', 'users edit', 'users delete',
-            'roles view', 'roles create', 'roles edit', 'roles delete',
-            'permissions view', 'permissions create', 'permissions edit', 'permissions delete',
-            'modules view', 'modules create', 'modules edit', 'modules delete',
-            'categories view', 'categories create', 'categories edit', 'categories delete',
-            'products view', 'products create', 'products edit', 'products delete',
-        ];
+        $allPermissions = Permission::pluck('name')->toArray();
 
         $roles = [
-            'Super Admin' => $superAdminPermissions,
-            'Admin' => ['view users', 'create users', 'edit users', 'view roles', 'view permissions', 'view modules', 'users view', 'users create', 'users edit', 'roles view', 'permissions view', 'modules view', 'categories view', 'categories create', 'categories edit', 'categories delete', 'products view', 'products create', 'products edit', 'products delete'],
-            'Manager' => ['view users', 'view modules', 'users view', 'modules view'],
-            'User' => ['view modules', 'modules view'],
+            'Administrador' => $allPermissions,
+            'Vendedor' => [
+                'orders view', 'orders edit',
+                'categories view', 'categories create', 'categories edit',
+                'products view', 'products create', 'products edit', 'products delete',
+            ],
+            'Cliente' => [
+                'products view',
+            ],
         ];
 
         foreach ($roles as $roleName => $permissions) {
-            $role = Role::firstOrCreate(['name' => $roleName, 'guard_name' => 'web']);
+            $role = Role::firstOrCreate([
+                'name' => $roleName,
+                'guard_name' => 'web',
+            ]);
             $role->syncPermissions($permissions);
         }
     }
 
-    private function createSuperAdmin(): void
+    private function createAdmin(): void
     {
-        $superAdmin = User::firstOrCreate(
+        $admin = User::firstOrCreate(
             ['email' => 'admin@caffa.com'],
             [
-                'name' => 'Super Administrador',
-                'password' => bcrypt('password'),
+                'name' => 'Administrador',
+                'password' => 'password',
                 'is_superadmin' => true,
             ]
         );
 
-        $superAdmin->assignRole('Super Admin');
+        $admin->assignRole('Administrador');
     }
 }

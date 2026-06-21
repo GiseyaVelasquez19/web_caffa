@@ -10,7 +10,7 @@ class RoleController extends Controller
 {
     public function index()
     {
-        auth()->user()->can('view roles') ?: abort(403);
+        auth()->user()->can('roles view') ?: abort(403);
         $roles = Role::paginate(15);
 
         return view('roles.index', compact('roles'));
@@ -18,7 +18,7 @@ class RoleController extends Controller
 
     public function create()
     {
-        auth()->user()->can('create roles') ?: abort(403);
+        auth()->user()->can('roles create') ?: abort(403);
         $permissions = Permission::all();
 
         return view('roles.create', compact('permissions'));
@@ -26,7 +26,7 @@ class RoleController extends Controller
 
     public function store(Request $request)
     {
-        auth()->user()->can('create roles') ?: abort(403);
+        auth()->user()->can('roles create') ?: abort(403);
 
         $validated = $request->validate([
             'name' => 'required|string|unique:roles',
@@ -44,7 +44,7 @@ class RoleController extends Controller
 
     public function edit(Role $role)
     {
-        auth()->user()->can('edit roles') ?: abort(403);
+        auth()->user()->can('roles edit') ?: abort(403);
         $permissions = Permission::all();
         $rolePermissions = $role->permissions->pluck('id')->toArray();
 
@@ -53,7 +53,7 @@ class RoleController extends Controller
 
     public function update(Request $request, Role $role)
     {
-        auth()->user()->can('edit roles') ?: abort(403);
+        auth()->user()->can('roles edit') ?: abort(403);
 
         $validated = $request->validate([
             'name' => 'required|string|unique:roles,name,'.$role->id,
@@ -71,7 +71,7 @@ class RoleController extends Controller
 
     public function destroy(Role $role)
     {
-        auth()->user()->can('delete roles') ?: abort(403);
+        auth()->user()->can('roles delete') ?: abort(403);
 
         $role->delete();
 

@@ -51,7 +51,7 @@ class AuthController extends Controller
             'password' => $validated['password'],
         ]);
 
-        $defaultRole = Role::where('name', ' Usuario')->first();
+        $defaultRole = Role::where('name', 'Cliente')->first();
         if ($defaultRole) {
             $user->assignRole($defaultRole);
         }

@@ -30,7 +30,11 @@
             <tbody class="divide-y divide-gray-100">
                 @forelse ($modules as $module)
                     <tr class="hover:bg-gray-50 transition">
-                        <td class="px-6 py-4 text-sm text-center">{{ $module->icono ?? '📦' }}</td>
+                        <td class="px-6 py-4 text-sm text-center">
+                            <span class="inline-flex w-10 h-10 rounded-xl items-center justify-center text-lg" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)">
+                                {{ $module->icono ?? '📦' }}
+                            </span>
+                        </td>
                         <td class="px-6 py-4 text-sm font-medium text-gray-800">{{ $module->nombre }}</td>
                         <td class="px-6 py-4 text-sm text-gray-500">
                             <code class="bg-gray-100 px-2 py-1 rounded text-xs">{{ $module->slug }}</code>
