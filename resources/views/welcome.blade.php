@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>Web Caffa - Café en Grano con Sabores</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
     <body class="bg-[#FAF7F4] min-h-screen">
@@ -21,11 +22,11 @@
                     <nav class="flex items-center space-x-4">
                         @auth
                             <a href="{{ url('/dashboard') }}" class="bg-white/20 hover:bg-white/30 text-white px-4 py-2 rounded-lg transition text-sm font-medium backdrop-blur-sm">
-                                Dashboard
+                                <i class="fas fa-chart-pie mr-1"></i> Dashboard
                             </a>
                         @else
                             <a href="{{ route('login') }}" class="bg-white text-[#6F4E37] hover:bg-white/90 px-4 py-2 rounded-lg transition text-sm font-medium">
-                                Iniciar Sesión
+                                <i class="fas fa-sign-in-alt mr-1"></i> Iniciar Sesión
                             </a>
                         @endauth
                     </nav>
@@ -47,15 +48,15 @@
                     <div class="flex gap-4">
                         @auth
                             <a href="{{ url('/dashboard') }}" class="bg-white text-[#6F4E37] hover:bg-white/90 px-6 py-3 rounded-lg transition font-medium">
-                                Ir al Dashboard
+                                <i class="fas fa-tachometer-alt mr-1"></i> Ir al Dashboard
                             </a>
                         @else
                             <a href="{{ route('login') }}" class="bg-white text-[#6F4E37] hover:bg-white/90 px-6 py-3 rounded-lg transition font-medium">
-                                Iniciar Sesión
+                                <i class="fas fa-sign-in-alt mr-1"></i> Iniciar Sesión
                             </a>
                         @endauth
                         <a href="#features" class="bg-white/20 hover:bg-white/30 text-white px-6 py-3 rounded-lg transition font-medium backdrop-blur-sm">
-                            Conocer Más
+                            <i class="fas fa-info-circle mr-1"></i> Conocer Más
                         </a>
                     </div>
                 </div>
@@ -67,27 +68,27 @@
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-16">
                 <!-- About -->
                 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Bienvenido a Caffa</h2>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4"><i class="fas fa-mug-hot mr-2" style="color: #6F4E37"></i>Bienvenido a Caffa</h2>
                     <p class="text-gray-600 mb-6">
                         Caffa es tu plataforma de gestión para vender café en grano con una variedad de sabores únicos y deliciosos.
                     </p>
                     <div class="space-y-4">
                         <div class="flex items-start space-x-3">
-                            <span class="w-10 h-10 rounded-lg flex items-center justify-center text-lg" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)"><i class="fas fa-mug-hot" style="color: #6F4E37"></i></span>
+                            <span class="w-10 h-10 rounded-lg flex items-center justify-center text-lg flex-shrink-0" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)"><i class="fas fa-mug-hot" style="color: #6F4E37"></i></span>
                             <div>
                                 <h3 class="font-semibold text-gray-800">Café Premium</h3>
                                 <p class="text-sm text-gray-500">Granos seleccionados y tostados artesanalmente</p>
                             </div>
                         </div>
                         <div class="flex items-start space-x-3">
-                            <span class="w-10 h-10 rounded-lg flex items-center justify-center text-lg" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)"><i class="fas fa-bullseye" style="color: #6F4E37"></i></span>
+                            <span class="w-10 h-10 rounded-lg flex items-center justify-center text-lg flex-shrink-0" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)"><i class="fas fa-bullseye" style="color: #6F4E37"></i></span>
                             <div>
                                 <h3 class="font-semibold text-gray-800">Sabores Variados</h3>
                                 <p class="text-sm text-gray-500">Clásico, Chocolate, Vainilla, Caramelo y más</p>
                             </div>
                         </div>
                         <div class="flex items-start space-x-3">
-                            <span class="w-10 h-10 rounded-lg flex items-center justify-center text-lg" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)"><i class="fas fa-rocket" style="color: #6F4E37"></i></span>
+                            <span class="w-10 h-10 rounded-lg flex items-center justify-center text-lg flex-shrink-0" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)"><i class="fas fa-rocket" style="color: #6F4E37"></i></span>
                             <div>
                                 <h3 class="font-semibold text-gray-800">Gestión Completa</h3>
                                 <p class="text-sm text-gray-500">Sistema de administración profesional</p>
@@ -98,21 +99,25 @@
 
                 <!-- Flavors -->
                 <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8">
-                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Nuestros Sabores</h2>
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4"><i class="fas fa-cookie-bite mr-2" style="color: #6F4E37"></i>Nuestros Sabores</h2>
                     <div class="grid grid-cols-2 gap-4">
                         <div class="p-4 rounded-xl" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)">
+                            <i class="fas fa-seedling text-lg mb-2 block" style="color: #6F4E37"></i>
                             <p class="font-semibold text-gray-800">Clásico</p>
                             <p class="text-sm text-gray-500">Sabor tradicional</p>
                         </div>
                         <div class="p-4 rounded-xl" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)">
+                            <i class="fas fa-candy-cane text-lg mb-2 block" style="color: #6F4E37"></i>
                             <p class="font-semibold text-gray-800">Chocolate</p>
                             <p class="text-sm text-gray-500">Notas de cacao</p>
                         </div>
                         <div class="p-4 rounded-xl" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)">
+                            <i class="fas fa-leaf text-lg mb-2 block" style="color: #6F4E37"></i>
                             <p class="font-semibold text-gray-800">Vainilla</p>
                             <p class="text-sm text-gray-500">Suave y aromático</p>
                         </div>
                         <div class="p-4 rounded-xl" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)">
+                            <i class="fas fa-candy-cane text-lg mb-2 block" style="color: #6F4E37"></i>
                             <p class="font-semibold text-gray-800">Caramelo</p>
                             <p class="text-sm text-gray-500">Dulce y sofisticado</p>
                         </div>
@@ -122,7 +127,7 @@
 
             <!-- Why Choose Us -->
             <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-8 mb-16">
-                <h2 class="text-2xl font-bold text-gray-800 mb-8 text-center">¿Por qué elegir Caffa?</h2>
+                <h2 class="text-2xl font-bold text-gray-800 mb-8 text-center"><i class="fas fa-question-circle mr-2" style="color: #6F4E37"></i>¿Por qué elegir Caffa?</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="text-center">
                         <div class="w-16 h-16 rounded-2xl flex items-center justify-center text-3xl mx-auto mb-4" style="background: linear-gradient(135deg, #F5EDE6 0%, #EDE0D4 100%)"><i class="fas fa-award" style="color: #6F4E37"></i></div>
@@ -144,15 +149,15 @@
 
             <!-- CTA -->
             <div class="text-center">
-                <h2 class="text-2xl font-bold text-gray-800 mb-4">¿Listo para comenzar?</h2>
+                <h2 class="text-2xl font-bold text-gray-800 mb-4"><i class="fas fa-coffee mr-2" style="color: #6F4E37"></i>¿Listo para comenzar?</h2>
                 <p class="text-gray-600 mb-6">Inicia sesión en tu cuenta para acceder al panel de administración</p>
                 @auth
                     <a href="{{ url('/dashboard') }}" class="inline-block text-white font-medium py-3 px-8 rounded-lg transition" style="background-color: #6F4E37" onmouseover="this.style.backgroundColor='#5A3E2B'" onmouseout="this.style.backgroundColor='#6F4E37'">
-                        Ir al Dashboard
+                        <i class="fas fa-tachometer-alt mr-1"></i> Ir al Dashboard
                     </a>
                 @else
                     <a href="{{ route('login') }}" class="inline-block text-white font-medium py-3 px-8 rounded-lg transition" style="background-color: #6F4E37" onmouseover="this.style.backgroundColor='#5A3E2B'" onmouseout="this.style.backgroundColor='#6F4E37'">
-                        Iniciar Sesión
+                        <i class="fas fa-sign-in-alt mr-1"></i> Iniciar Sesión
                     </a>
                 @endauth
             </div>
@@ -160,7 +165,7 @@
 
         <!-- Footer -->
         <footer class="text-white text-center py-6 mt-12" style="background: linear-gradient(135deg, #6F4E37 0%, #5A3E2B 100%)">
-            <p>&copy; 2026 Web Caffa - Café en Grano. Todos los derechos reservados.</p>
+            <p><i class="fas fa-coffee mr-1"></i> &copy; 2026 Web Caffa - Café en Grano. Todos los derechos reservados.</p>
         </footer>
     </body>
 </html>
